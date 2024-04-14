@@ -1,0 +1,5 @@
+Switch case for each button (or number only)
+Numbers being pushed from the right to make a number
+Operators (multiply, add, delete, divide) breaking the number pushing
+Second number being built
+Any operator ('equal to' included) proceeding the previous calculation and showing on the list

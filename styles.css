@@ -1,0 +1,24 @@
+.objectArea {
+    height: 564px;
+    width: 400px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+.buttons > .allclear, .buttons > .clear{
+    width: 50%;
+}
+
+.screen-area {
+    
+}
