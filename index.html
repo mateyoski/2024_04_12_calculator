@@ -14,30 +14,30 @@
     <div class="objectArea">
         <div class="screen-area">
         <div class="screen">
-            <div class="screen-prev">&nbsp;</div>
-            <div class="screen-current">0</div>
+            <div class="screen-prev" id="screen-prev">&nbsp;</div>
+            <div class="screen-current" id="screen-current">0</div>
         </div>
         </div>
         <div class="buttons">
-            <button class="allclear">AC</button>
-            <button class="clear">C</button>
-            <button class="operator" value="%">&#37</button>
-            <button class="operator" value="/">&#247</button>
-            <button class="digit" value="7">7</button>
-            <button class="digit" value="8">8</button>
-            <button class="digit" value="9">9</button>
-            <button class="operator" value="x">&#215</button>
-            <button class="digit" value="4">4</button>
-            <button class="digit" value="5">5</button>
-            <button class="digit" value="6">6</button>
-            <button class="operator" value="-">&#45</button>
-            <button class="digit" value="1">1</button>
-            <button class="digit" value="2">2</button>
-            <button class="digit" value="3">3</button>
-            <button class="operator" value="+">&#43</button>
-            <button class="digit" value="0">0</button>
-            <button class="operator" value=".">.</button>
-            <button class="equal" value="=">&#61</button>
+            <button class="button" onclick="this.blur();">AC</button>
+            <button class="button" onclick="this.blur();">C</button>
+            <button class="button" onclick="this.blur();" data-operator>&#37</button>
+            <button class="button" onclick="this.blur();" data-operator>&#247</button>
+            <button class="button" onclick="this.blur();" data-number>7</button>
+            <button class="button" onclick="this.blur();" data-number>8</button>
+            <button class="button" onclick="this.blur();" data-number>9</button>
+            <button class="button" onclick="this.blur();" data-operator>&#215</button>
+            <button class="button" onclick="this.blur();" data-number>4</button>
+            <button class="button" onclick="this.blur();" data-number>5</button>
+            <button class="button" onclick="this.blur();" data-number>6</button>
+            <button class="button" onclick="this.blur();" data-operator>&#45</button>
+            <button class="button" onclick="this.blur();" data-number>1</button>
+            <button class="button" onclick="this.blur();" data-number>2</button>
+            <button class="button" onclick="this.blur();" data-number>3</button>
+            <button class="button" onclick="this.blur();" data-operator>&#43</button>
+            <button class="button" onclick="this.blur();" data-number>0</button>
+            <button class="button" onclick="this.blur();" data-number>.</button>
+            <button class="button" onclick="this.blur();" id="equalsBtn">&#61</button>
         </div>
     </div>
 </div>

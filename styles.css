@@ -91,7 +91,7 @@
     color: #dfdfdf;
 }
 
-button.equal {
+#equalsBtn {
     grid-column: 3/5;
     border-radius: 2.5rem;
 }
