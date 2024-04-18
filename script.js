@@ -19,10 +19,18 @@ function handleKeyboardInput(ev) {
     if(ev.key >= 0 && ev.key <= 9) appendNumber(ev.key)
 }
 
+function chooseOperation(operator) {
+    if()
+}
+
 function clear() {
     currentOperationScreen.textContent='0';
     prevOperationScreen.textContent = ' ';
 
+}
+
+function roundNumber(value) {
+    return Math.round(value*1000) / 1000;
 }
 
 function add(a,b) {
