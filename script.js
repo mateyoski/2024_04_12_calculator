@@ -1,13 +1,25 @@
+let operandOne = ''
+let operandTwo = ''
+let currOperation = null
+let resetScreen = false
+
 const currentScreenArea = document.getElementById('screen-current');
 const numberButtons = document.querySelectorAll('[data-number]');
 const operatorButtons = document.querySelectorAll('[data-operator]');
 const prevOperationScreen = document.getElementById('screen-prev');
 const currentOperationScreen = document.getElementById('screen-current');
+const pointButton = document.getElementById('pointBtn');
+const deleteButton = document.getElementById('deleteBtn');
+const clearButton = document.getElementById('clearBtn');
+const equalsButton = document.getElementById('equalsBtn');
 
 window.addEventListener('keydown', handleKeyboardInput)
 
 numberButtons.forEach((button) => 
 button.addEventListener('click', () => appendNumber(button.textContent)))
+
+operatorButtons.forEach((button) => 
+button.addEventListener('click', () => chooseOperation(button.textContent)))
 
 function appendNumber(number) {
     if(currentScreenArea.textContent === '0'){
@@ -20,7 +32,7 @@ function handleKeyboardInput(ev) {
 }
 
 function chooseOperation(operator) {
-    if()
+    if(currOperation !== null)
 }
 
 function clear() {
@@ -47,4 +59,30 @@ function multiply(a, b) {
 
 function divide(a, b) {
     return a / b
+}
+
+function convertOperator(keyboardOperator) {
+    if (keyboardOperator === '/') return '÷'
+    if (keyboardOperator === '*') return '×'
+    if (keyboardOperator === '-') return '−'
+    if (keyboardOperator === '+') return '+'
+  }
+
+function operate(operator, a, b) {
+    a = Number(a);
+    b = Number(b);
+
+    switch(operator) {
+        case '+':
+            return add(a, b)
+        case '-':
+            return subtract(a,b)
+        case '*':
+            return multiply(a,b)
+        case '÷':
+            if (b === 0) return null
+            else return divide(a, b)
+        default:
+            return null
+    }
 }
