@@ -32,7 +32,11 @@ function handleKeyboardInput(ev) {
 }
 
 function chooseOperation(operator) {
-    if(currOperation !== null)
+    if(currOperation !== null) evaluate()
+    operandOne = currentOperationScreen.textContent;
+    currOperation = operator;
+    prevOperationScreen.textContent = '${operandOne} ${operandTwo}'
+    resetScreen = true;
 }
 
 function clear() {
@@ -43,6 +47,19 @@ function clear() {
 
 function roundNumber(value) {
     return Math.round(value*1000) / 1000;
+}
+
+function evaluate() {
+    if (currOperation === '÷' && currentOperationScreen.textContent === '0') {
+        alert("Dividing by 0 is forbidden!");
+        return
+    }
+    operandTwo = currentOperationScreen.textContent;
+    currentOperationScreen.textContent = roundNumber(
+        operate(currOperation, operandOne, operandTwo)
+    )
+    prevOperationScreen.textContent = '${operandOne} ${currOperation} ${operandTwo} =';
+    currOperation = null;
 }
 
 function add(a,b) {
