@@ -1,105 +1,118 @@
-let operandOne = ''
-let operandTwo = ''
-let currOperation = null
-let resetScreen = false
+let firstOperator = "";
+let secondOperator = "";
+let gottaReset = false;
+let currOperator = null;
 
-const currentScreenArea = document.getElementById('screen-current');
-const numberButtons = document.querySelectorAll('[data-number]');
-const operatorButtons = document.querySelectorAll('[data-operator]');
-const prevOperationScreen = document.getElementById('screen-prev');
-const currentOperationScreen = document.getElementById('screen-current');
-const pointButton = document.getElementById('pointBtn');
-const deleteButton = document.getElementById('deleteBtn');
-const clearButton = document.getElementById('clearBtn');
-const equalsButton = document.getElementById('equalsBtn');
+const currentScreenArea = document.getElementById("screen-current");
+const prevScreenArea = document.getElementById("screen-prev");
+const numberButtons = document.querySelectorAll("[data-number]");
+const operatorButtons = document.querySelectorAll("[data-operator]");
+const clearButton = document.getElementById("clearBtn");
+const deleteButton = document.getElementById("deleteBtn");
+const pointButton = document.getElementById("pointBtn");
+const equalsButton = document.getElementById("equalsBtn");
 
-window.addEventListener('keydown', handleKeyboardInput)
+deleteButton.addEventListener('click', removeOne);
+pointButton.addEventListener('click', addPoint);
+clearButton.addEventListener('click', clear);
+equalsButton.addEventListener('click', evaluate)
 
-numberButtons.forEach((button) => 
-button.addEventListener('click', () => appendNumber(button.textContent)))
+numberButtons.forEach((button) =>
+button.addEventListener('click', () => addNumber(button.textContent)))
 
-operatorButtons.forEach((button) => 
-button.addEventListener('click', () => chooseOperation(button.textContent)))
+operatorButtons.forEach((button) =>
+button.addEventListener('click', () => chooseOperator(button.textContent)))
 
-function appendNumber(number) {
-    if(currentScreenArea.textContent === '0'){
-    currentScreenArea.textContent = '';}
+function addNumber (number) {
+    if(currentScreenArea.textContent === "0" || gottaReset) {
+        resetScreen();
+    }
     currentScreenArea.textContent += number;
 }
 
-function handleKeyboardInput(ev) {
-    if(ev.key >= 0 && ev.key <= 9) appendNumber(ev.key)
-}
-
-function chooseOperation(operator) {
-    if(currOperation !== null) evaluate()
-    operandOne = currentOperationScreen.textContent;
-    currOperation = operator;
-    prevOperationScreen.textContent = '${operandOne} ${operandTwo}'
-    resetScreen = true;
-}
-
 function clear() {
-    currentOperationScreen.textContent='0';
-    prevOperationScreen.textContent = ' ';
-
+    currentScreenArea.textContent = "0";
+    prevScreenArea.textContent = " ";
+    firstOperator = "";
+    secondOperator = "";
+    currOperator = null;
 }
 
-function roundNumber(value) {
-    return Math.round(value*1000) / 1000;
+function removeOne() {
+    currentScreenArea.textContent = currentScreenArea.textContent.toString().slice(0,-1);
+}
+
+function resetScreen() {
+    currentScreenArea.textContent = "";
+    gottaReset = false;
+}
+
+function addPoint() {
+    if(gottaReset) resetScreen();
+    if(currentScreenArea.textContent === "")
+        currentScreenArea.textContent = "0";
+    if(currentScreenArea.textContent.includes(".")) return;
+    currentScreenArea.textContent += ".";
+}
+
+function roundValue(value) {
+    return Math.round(value * 1000) / 1000;
 }
 
 function evaluate() {
-    if (currOperation === '÷' && currentOperationScreen.textContent === '0') {
-        alert("Dividing by 0 is forbidden!");
+    if(currOperator === null || gottaReset) return;
+    if(currOperator === "÷" && currentScreenArea.textContent === "0") {
+        alert("No no no!")
         return
     }
-    operandTwo = currentOperationScreen.textContent;
-    currentOperationScreen.textContent = roundNumber(
-        operate(currOperation, operandOne, operandTwo)
+    secondOperator = currOperator.textContent
+    currentScreenArea.textContent = roundValue(operate(currOperator, firstOperator, secondOperator)
     )
-    prevOperationScreen.textContent = '${operandOne} ${currOperation} ${operandTwo} =';
-    currOperation = null;
+    prevScreenArea.textContent = `${firstOperator} ${currOperator} ${secondOperator} =`
+    currOperator = null
 }
 
-function add(a,b) {
-    return a + b
+function chooseOperator(operator) {
+    if(currOperator !== null) evaluate()
+    firstOperator = currentScreenArea.textContent
+    currOperator = operator
+    prevScreenArea.textContent = `${firstOperator} ${currOperator}`
+    gottaReset = true
 }
 
-function subtract(a, b) {
-    return a - b
-}
-
-function multiply(a, b) {
-    return a * b
-}
-
-function divide(a, b) {
-    return a / b
-}
-
-function convertOperator(keyboardOperator) {
-    if (keyboardOperator === '/') return '÷'
-    if (keyboardOperator === '*') return '×'
-    if (keyboardOperator === '-') return '−'
-    if (keyboardOperator === '+') return '+'
-  }
-
-function operate(operator, a, b) {
+function operate(operator, a, b){
     a = Number(a);
     b = Number(b);
-
     switch(operator) {
-        case '+':
-            return add(a, b)
-        case '-':
-            return subtract(a,b)
-        case '*':
-            return multiply(a,b)
-        case '÷':
-            if (b === 0) return null
-            else return divide(a, b)
+        case "+":
+            return add(a, b);
+        case "-":
+            return subtract(a, b);
+        case "*":
+            return multipy(a, b);
+        case "÷":
+            if(b === 0) return null;
+            else return divide(a, b);
         default:
             return null
     }
+}
+
+function add (a, b) {
+    return a + b;
+}
+
+function subtract (a, b) {
+    return a - b;;
+}
+
+function multipy (a, b) {
+    return a * b;
+}
+
+function divide (a, b) {
+    if(b === "0"){
+        return null
+    }
+    else return a / b;
 }
