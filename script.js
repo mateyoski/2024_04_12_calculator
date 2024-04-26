@@ -15,7 +15,7 @@ const equalsButton = document.getElementById("equalsBtn");
 deleteButton.addEventListener('click', removeOne);
 pointButton.addEventListener('click', addPoint);
 clearButton.addEventListener('click', clear);
-equalsButton.addEventListener('click', evaluate)
+equalsButton.addEventListener('click', evaluate);
 
 numberButtons.forEach((button) =>
 button.addEventListener('click', () => addNumber(button.textContent)))
@@ -65,7 +65,7 @@ function evaluate() {
         alert("No no no!")
         return
     }
-    secondOperator = currOperator.textContent
+    secondOperator = currentScreenArea.textContent
     currentScreenArea.textContent = roundValue(operate(currOperator, firstOperator, secondOperator)
     )
     prevScreenArea.textContent = `${firstOperator} ${currOperator} ${secondOperator} =`
@@ -73,11 +73,11 @@ function evaluate() {
 }
 
 function chooseOperator(operator) {
-    if(currOperator !== null) evaluate()
-    firstOperator = currentScreenArea.textContent
-    currOperator = operator
-    prevScreenArea.textContent = `${firstOperator} ${currOperator}`
-    gottaReset = true
+    if(currOperator !== null) evaluate();
+    firstOperator = currentScreenArea.textContent;
+    currOperator = operator;
+    prevScreenArea.textContent = `${firstOperator} ${currOperator}`;
+    gottaReset = true;
 }
 
 function operate(operator, a, b){
@@ -88,8 +88,8 @@ function operate(operator, a, b){
             return add(a, b);
         case "-":
             return subtract(a, b);
-        case "*":
-            return multipy(a, b);
+        case "×":
+            return multiply(a, b);
         case "÷":
             if(b === 0) return null;
             else return divide(a, b);
@@ -103,10 +103,10 @@ function add (a, b) {
 }
 
 function subtract (a, b) {
-    return a - b;;
+    return a - b;
 }
 
-function multipy (a, b) {
+function multiply (a, b) {
     return a * b;
 }
 
